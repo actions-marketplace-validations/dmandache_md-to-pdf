@@ -27,7 +27,7 @@ jobs:
           output: example/document.pdf
       - name: Commit and push example PDF
         run: |
-          git add example/document.pdf
+          git add -f example/document.pdf
           if git diff --cached --quiet; then
             echo "Example PDF has not changed"
             exit 0
