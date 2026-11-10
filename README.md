@@ -34,6 +34,10 @@ jobs:
 
 Download the PDF from the workflow run's **Artifacts** section. To version the PDF in your repository instead, add a commit step to your own workflow and grant it `contents: write` permission.
 
+For a document showcasing a table of contents, a local figure, tables, and links, see [the example](example/document.md). To render it, set `input: example/document.md` and `output: example.pdf` in the workflow above; include `example/**` in `push.paths` so changes to the document and figure trigger a rebuild.
+
+This repository also has a **Build example PDF** workflow. It runs when the example or renderer changes and can be started manually from the Actions tab. Download `example.pdf` from the run's **example-pdf** artifact.
+
 | Input | Default | Description |
 | --- | --- | --- |
 | `input` | `README.md` | Path to the Markdown file, relative to the caller's working directory. |

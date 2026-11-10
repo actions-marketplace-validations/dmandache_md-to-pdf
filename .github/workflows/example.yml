@@ -1,0 +1,29 @@
+name: Build example PDF
+
+on:
+  push:
+    paths:
+      - 'example/**'
+      - 'action.yml'
+      - 'render.cjs'
+      - 'package.json'
+      - '.github/workflows/example.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./
+        with:
+          input: example/document.md
+          output: example.pdf
+      - uses: actions/upload-artifact@v4
+        with:
+          name: example-pdf
+          path: example.pdf
+          if-no-files-found: error

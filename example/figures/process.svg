@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="180" viewBox="0 0 720 180" role="img" aria-labelledby="title desc">
+  <title id="title">Markdown to PDF process</title>
+  <desc id="desc">A Markdown file and its images go through the renderer to produce a PDF.</desc>
+  <rect width="720" height="180" rx="16" fill="#f6f8fa"/>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <rect x="24" y="48" width="180" height="84" rx="10" fill="#ddf4ff" stroke="#54aeff"/>
+    <text x="114" y="82" font-size="18" font-weight="bold" fill="#0969da">Markdown</text>
+    <text x="114" y="108" font-size="14" fill="#24292f">Text + images</text>
+    <path d="M215 90h45m-9-8 9 8-9 8" fill="none" stroke="#57606a" stroke-width="3"/>
+    <rect x="270" y="48" width="180" height="84" rx="10" fill="#eaeef2" stroke="#8c959f"/>
+    <text x="360" y="82" font-size="18" font-weight="bold" fill="#24292f">Renderer</text>
+    <text x="360" y="108" font-size="14" fill="#57606a">HTML + Chromium</text>
+    <path d="M461 90h45m-9-8 9 8-9 8" fill="none" stroke="#57606a" stroke-width="3"/>
+    <rect x="516" y="48" width="180" height="84" rx="10" fill="#dafbe1" stroke="#4ac26b"/>
+    <text x="606" y="82" font-size="18" font-weight="bold" fill="#1a7f37">PDF</text>
+    <text x="606" y="108" font-size="14" fill="#24292f">Links + pages</text>
+  </g>
+</svg>
