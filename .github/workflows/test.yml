@@ -7,7 +7,10 @@ permissions:
   contents: read
 jobs:
   render:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-24.04, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: ./
@@ -16,8 +19,9 @@ jobs:
           output: test-document.pdf
       - name: Check PDF links
         run: |
-          python3 -m pip install --user pypdf
-          python3 - <<'PY'
+          python3 -m venv "$RUNNER_TEMP/pdf-test-venv"
+          "$RUNNER_TEMP/pdf-test-venv/bin/pip" install pypdf
+          "$RUNNER_TEMP/pdf-test-venv/bin/python" - <<'PY'
           from pypdf import PdfReader
           pdf = PdfReader('test-document.pdf')
           links = [a.get_object() for page in pdf.pages for a in page.get('/Annots', [])]

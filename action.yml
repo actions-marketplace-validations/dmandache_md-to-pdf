@@ -1,4 +1,4 @@
-name: Markdown to PDF
+name: MD to PDF
 description: Render Markdown as a PDF with working heading links
 inputs:
   input:

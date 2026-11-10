@@ -8,6 +8,6 @@
     "github-markdown-css": "5.8.1",
     "github-slugger": "2.0.0",
     "markdown-it": "14.1.0",
-    "playwright": "1.55.0"
+    "playwright": "1.61.0"
   }
 }
