@@ -1,0 +1,13 @@
+{
+  "name": "markdown-to-pdf-action",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Render Markdown as a PDF in GitHub Actions",
+  "dependencies": {
+    "express": "4.21.2",
+    "github-markdown-css": "5.8.1",
+    "github-slugger": "2.0.0",
+    "markdown-it": "14.1.0",
+    "playwright": "1.55.0"
+  }
+}

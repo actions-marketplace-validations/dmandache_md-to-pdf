@@ -1,0 +1,36 @@
+name: Test action
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./
+        with:
+          input: test/document.md
+          output: test-document.pdf
+      - name: Check PDF links
+        run: |
+          python3 -m pip install --user pypdf
+          python3 - <<'PY'
+          from pypdf import PdfReader
+          pdf = PdfReader('test-document.pdf')
+          links = [a.get_object() for page in pdf.pages for a in page.get('/Annots', [])]
+          internal = [a for a in links if a.get('/Dest') or a.get('/A', {}).get('/S') == '/GoTo']
+          external = [a for a in links if a.get('/A', {}).get('/URI') == 'https://example.com/']
+          assert len(internal) >= 2, f'Expected two internal links, got {len(internal)}'
+          assert external, 'Expected external link'
+          PY
+      - name: Check broken links fail
+        shell: bash
+        run: |
+          printf '# Heading\n\n[Missing](#missing)\n' > test/broken.md
+          if MARKDOWN_INPUT=test/broken.md PDF_OUTPUT=broken.pdf node render.cjs; then
+            echo 'A missing target should fail the build' >&2
+            exit 1
+          fi
