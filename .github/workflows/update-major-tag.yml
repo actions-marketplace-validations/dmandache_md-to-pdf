@@ -1,0 +1,27 @@
+name: Update major version tag
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  update-tag:
+    if: ${{ !github.event.release.prerelease }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update major tag
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          if [[ ! "$RELEASE_TAG" =~ ^v([0-9]+)\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Skipping non-standard release tag: $RELEASE_TAG"
+            exit 0
+          fi
+          major="v${BASH_REMATCH[1]}"
+          git tag -f "$major"
+          git push origin "refs/tags/$major" --force

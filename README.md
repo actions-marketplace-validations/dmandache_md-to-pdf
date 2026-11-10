@@ -4,7 +4,7 @@ Render a Markdown file to a GitHub-styled A4 PDF with clickable heading links, i
 
 ## Usage
 
-After publishing a release and creating a `v1` tag for this action, add `.github/workflows/pdf.yml` to the repository containing the Markdown:
+Add `.github/workflows/pdf.yml` to the repository containing the Markdown:
 
 ```yaml
 name: Build PDF
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: dmandache/md-to-pdf@v1
+      - uses: dmandache/md-to-pdf@v1.0.0
         with:
           input: README.md
           output: documentation.pdf
@@ -54,3 +54,5 @@ MARKDOWN_INPUT=test/document.md PDF_OUTPUT=test-document.pdf node render.cjs
 ```
 
 The included workflow exercises the action on Ubuntu 24.04 and `ubuntu-latest`, checks that the PDF contains internal and external links, and verifies that a broken fragment fails the build. The action installs exact direct dependency versions, but transitive dependencies are not locked.
+
+Publishing a stable release with a tag such as `v1.0.0` automatically updates the corresponding major tag (`v1`) to the release commit. Prereleases and tags outside the `vMAJOR.MINOR.PATCH` format are skipped. Publish releases in version order to avoid moving a major tag back to an older version.
