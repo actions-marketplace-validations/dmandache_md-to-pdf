@@ -1,4 +1,4 @@
-# Markdown to PDF action
+# Markdown to PDF with Heading Link
 
 [![Tests](https://github.com/dmandache/md-to-pdf/actions/workflows/test.yml/badge.svg)](https://github.com/dmandache/md-to-pdf/actions/workflows/test.yml)
 [![Build example PDF](https://github.com/dmandache/md-to-pdf/actions/workflows/example.yml/badge.svg)](https://github.com/dmandache/md-to-pdf/actions/workflows/example.yml)
@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: dmandache/md-to-pdf@v1.0.0
+      - uses: dmandache/md-to-pdf@v1
         with:
           input: README.md
           output: documentation.pdf

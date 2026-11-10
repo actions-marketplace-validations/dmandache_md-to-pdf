@@ -1,5 +1,8 @@
-name: MD to PDF
+name: Markdown to PDF with Heading Link
 description: Render Markdown as a PDF with working heading links
+branding:
+  icon: file-text
+  color: blue
 inputs:
   input:
     description: Markdown file, relative to the repository root
