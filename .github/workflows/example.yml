@@ -2,8 +2,10 @@ name: Build example PDF
 
 on:
   push:
+    branches: [main]
     paths:
-      - 'example/**'
+      - 'example/document.md'
+      - 'example/figures/**'
       - 'action.yml'
       - 'render.cjs'
       - 'package.json'
@@ -11,19 +13,31 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: ./
         with:
           input: example/document.md
-          output: example.pdf
+          output: example/documents.pdf
+      - name: Commit and push example PDF
+        run: |
+          git add example/documents.pdf
+          if git diff --cached --quiet; then
+            echo "Example PDF has not changed"
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Update example PDF'
+          git push origin HEAD:main
       - uses: actions/upload-artifact@v4
         with:
           name: example-pdf
-          path: example.pdf
+          path: example/documents.pdf
           if-no-files-found: error
