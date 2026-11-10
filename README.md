@@ -4,7 +4,7 @@ Render a Markdown file to a GitHub-styled A4 PDF with clickable heading links, i
 
 ## Usage
 
-Publish this directory as a GitHub repository, create a `v1` tag, and replace `OWNER/markdown-to-pdf` below with its repository name. In the repository containing the Markdown, add `.github/workflows/pdf.yml`:
+After publishing a release and creating a `v1` tag for this action, add `.github/workflows/pdf.yml` to the repository containing the Markdown:
 
 ```yaml
 name: Build PDF
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: OWNER/markdown-to-pdf@v1
+      - uses: dmandache/md-to-pdf@v1
         with:
           input: README.md
           output: documentation.pdf
@@ -39,7 +39,7 @@ Download the PDF from the workflow run's **Artifacts** section. To version the P
 | `input` | `README.md` | Path to the Markdown file, relative to the caller's working directory. |
 | `output` | `document.pdf` | PDF path relative to the caller's working directory; its parent directory must exist. |
 
-The workflow must check out its repository before invoking the action. Use a Linux runner: the action installs Chromium and its system dependencies. Relative images are served from the Markdown file's directory; keep them within that directory. The caller's `push.paths` should include its image directories so image changes trigger a rebuild.
+The workflow must check out its repository before invoking the action. Use an Ubuntu runner: the action installs Chromium and its system dependencies. Playwright 1.61 supports Ubuntu 24.04 and 26.04. Relative images are served from the Markdown file's directory; keep them within that directory. The caller's `push.paths` should include its image directories so image changes trigger a rebuild.
 
 The renderer supports Markdown and raw HTML using markdown-it; it does not reproduce every GitHub Markdown extension. Provide only trusted Markdown and assets: raw HTML and external resources are loaded during rendering. Do not run the action on untrusted pull request content with write permissions or secrets.
 
@@ -53,4 +53,4 @@ npx playwright install --with-deps chromium
 MARKDOWN_INPUT=test/document.md PDF_OUTPUT=test-document.pdf node render.cjs
 ```
 
-The included workflow exercises the action, checks that the PDF contains internal and external links, and verifies that a broken fragment fails the build. The action installs exact direct dependency versions, but transitive dependencies are not locked.
+The included workflow exercises the action on Ubuntu 24.04 and `ubuntu-latest`, checks that the PDF contains internal and external links, and verifies that a broken fragment fails the build. The action installs exact direct dependency versions, but transitive dependencies are not locked.
