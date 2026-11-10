@@ -24,10 +24,10 @@ jobs:
       - uses: ./
         with:
           input: example/document.md
-          output: example/documents.pdf
+          output: example/document.pdf
       - name: Commit and push example PDF
         run: |
-          git add example/documents.pdf
+          git add example/document.pdf
           if git diff --cached --quiet; then
             echo "Example PDF has not changed"
             exit 0
@@ -39,5 +39,5 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: example-pdf
-          path: example/documents.pdf
+          path: example/document.pdf
           if-no-files-found: error
