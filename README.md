@@ -1,10 +1,10 @@
-# Markdown to PDF with Heading Link
+# Markdown to PDF with Heading Links and GitHub style
 
 [![Tests](https://github.com/dmandache/md-to-pdf/actions/workflows/test.yml/badge.svg)](https://github.com/dmandache/md-to-pdf/actions/workflows/test.yml)
 [![Build example PDF](https://github.com/dmandache/md-to-pdf/actions/workflows/example.yml/badge.svg)](https://github.com/dmandache/md-to-pdf/actions/workflows/example.yml)
 [![Latest release](https://img.shields.io/github/v/release/dmandache/md-to-pdf)](https://github.com/dmandache/md-to-pdf/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-![Views](https://hits.sh/github.com/dmandache/md-to-pdf.svg?label=Views)
+![Views](https://hits.sh/github.com/dmandache/md-to-pdf.svg?label=views)
 
 Render a Markdown file to a GitHub-styled A4 PDF with clickable heading links, images, and page numbers. Heading IDs follow GitHub's slug conventions, including duplicate headings. The action fails if an internal fragment link has no target or an image fails to load.
 
